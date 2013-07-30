@@ -2,10 +2,10 @@
 
 wd = require "wd"
 Q = require "q"
-QQ = require "../forwarding-promise"
+QProxy = require "../q-proxy"
 seq = require "../seq"
 
-browser = QQ(wd.promiseRemote("localhost", 4444))
+browser = QProxy(wd.promiseRemote("localhost", 4444))
 
 loginFacebook = (credentials) ->
   seq(

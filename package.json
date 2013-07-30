@@ -1,0 +1,29 @@
+{
+  "name": "q-proxy",
+  "version": "0.0.1",
+  "description": "",
+  "main": "q-proxy.coffee",
+  "directories": {
+    "example": "examples",
+    "test": "test"
+  },
+  "dependencies": {
+    "node-proxy": "latest",
+    "q": "latest",
+    "coffee-script": "latest"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tlrobinson/forwarding-promise.git"
+  },
+  "author": "",
+  "license": "BSD",
+  "gitHead": "1f39f11dc34194d24def7490519e42c354a65805",
+  "bugs": {
+    "url": "https://github.com/tlrobinson/forwarding-promise/issues"
+  }
+}
