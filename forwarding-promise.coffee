@@ -9,14 +9,8 @@ makeForwardingPromise = (target) ->
     if typeof @target[name] is "function" or @target[name] is undefined
       =>
         args = arguments
-        if typeof @target[name] is "function"
-          console.log "name1", name
-          makeForwardingPromise target.then (result) =>
-            @target[name].apply(@target, args)
-        else
-          console.log "name2", name
-          makeForwardingPromise target.then (result) =>
-            result[name].apply(result, args)
+        makeForwardingPromise target.then (result) =>
+          (@target[name] or result[name]).apply(@target, args)
     else
       @target[name]
   Proxy.create(forwarder, Object.getPrototypeOf(target))
