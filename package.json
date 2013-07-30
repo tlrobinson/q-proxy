@@ -1,29 +1,44 @@
 {
   "name": "q-proxy",
   "version": "0.0.1",
-  "description": "",
-  "main": "q-proxy.coffee",
+  "description": "A promise wrapper that proxies future method calls.",
+  "main": "index.js",
   "directories": {
-    "example": "examples",
-    "test": "test"
+    "example": "example"
   },
   "dependencies": {
-    "node-proxy": "latest",
     "q": "latest",
-    "coffee-script": "latest"
+    "node-proxy": "latest"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "coffee-script": "latest",
+    "q-step": "latest",
+    "wd": "latest"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublish": "coffee -c index.coffee"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/tlrobinson/forwarding-promise.git"
+    "url": "git://github.com/tlrobinson/q-proxy.git"
   },
-  "author": "",
-  "license": "BSD",
-  "gitHead": "1f39f11dc34194d24def7490519e42c354a65805",
+  "author": {
+    "name": "Tom Robinson",
+    "email": "tlrobinson@gmail.com",
+    "url": "http://tlrobinson.net/"
+  },
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/tlrobinson/forwarding-promise/issues"
-  }
+    "url": "https://github.com/tlrobinson/q-proxy/issues"
+  },
+  "keywords": [
+    "q",
+    "promise",
+    "promises",
+    "promise/a",
+    "promises/a+",
+    "promises-aplus",
+    "control"
+  ]
 }

@@ -2,13 +2,13 @@
 
 wd = require "wd"
 Q = require "q"
-QProxy = require "../q-proxy"
-seq = require "../seq"
+QProxy = require "../index.coffee"
+QStep = require "q-step"
 
 browser = QProxy(wd.promiseRemote("localhost", 4444))
 
 loginFacebook = (credentials) ->
-  seq(
+  QStep(
     -> browser.init(browserName: "firefox")
     -> browser.get("https://www.facebook.com/")
     -> browser.elementById("email").type(credentials.email)

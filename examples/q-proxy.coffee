@@ -1,5 +1,6 @@
+
 Q = require "q"
-QQ = require "../forwarding-promise"
+QProxy = require "../index.coffee"
 
 p = Q.delay(1000).then ->
   foo: ->
@@ -12,5 +13,5 @@ p = Q.delay(1000).then ->
           console.log "baz"
           1234
 
-QQ(p).foo().delay(1000).bar().delay(2000).baz().delay(3000).then (result) ->
+QProxy(p).foo().delay(1000).bar().delay(2000).baz().delay(3000).then (result) ->
   console.log result
