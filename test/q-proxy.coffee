@@ -14,14 +14,14 @@ makeObject = (child) ->
     self: -> object
     value: -> "ok"
     child: -> child
-    delay: -> Q.delay(0).then -> child
+    async: -> Q.delay(0).then -> child
     error: -> throw new Error()
 
 mapping =
   s: "self"
   v: "value"
   c: "child"
-  d: "delay"
+  a: "async"
   e: "error"
 
 codes = [""].concat Object.keys(mapping)
@@ -50,16 +50,16 @@ describe "QProxy", ->
       components = c.split("")
       methods = components.map (c) -> mapping[c]
       identifier = "proxy." + methods.join("().") + "()"
-      # no error, delay, error
-      if c.match(/^[^e]*d.*e.*$/)
+      # no error, async, error
+      if c.match(/^[^e]*a.*e.*$/)
         it "#{identifier} should be rejected", ->
           fnForMethods(proxy, methods)().should.be.rejected
-      # no error or value, delay, no error
-      else if c.match(/^[^e]*d[^e]*$/)
+      # no error or value, async, no error
+      else if c.match(/^[^e]*a[^e]*$/)
         it "#{identifier} should resolve to 'ok'", ->
           fnForMethods(proxy, methods)().should.eventually.equal("ok")
-      # no delay or value, error
-      else if c.match(/^[^d]*e/)
+      # no async or value, error
+      else if c.match(/^[^a]*e/)
         it "#{identifier} should throw", ->
           fnForMethods(proxy, methods).should.throw()
       else
