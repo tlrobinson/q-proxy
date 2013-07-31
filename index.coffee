@@ -6,13 +6,17 @@ ForwardingHandler = require "./forwarding-handler"
 QProxy = (target) ->
   forwarder = new ForwardingHandler(target)
   forwarder.get = (rcvr, name) ->
-    if typeof @target[name] is "function" or @target[name] is undefined
+    if typeof target[name] is "function" or target[name] is undefined
       =>
         args = arguments
-        if @target[name]
-          QProxy Q.when @target, => @target[name].apply(@target, args)
+        if target[name]
+          result = target[name].apply(target, args)
         else
-          QProxy target.post(name, args)
+          result = target.post(name, args)
+        if result? and typeof result is "object"
+          QProxy result
+        else
+          result
     else
       @target[name]
   Proxy.create(forwarder, Object.getPrototypeOf(target))

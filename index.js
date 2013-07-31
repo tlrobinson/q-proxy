@@ -13,16 +13,19 @@
     forwarder = new ForwardingHandler(target);
     forwarder.get = function(rcvr, name) {
       var _this = this;
-      if (typeof this.target[name] === "function" || this.target[name] === void 0) {
+      if (typeof target[name] === "function" || target[name] === void 0) {
         return function() {
-          var args;
+          var args, result;
           args = arguments;
-          if (_this.target[name]) {
-            return QProxy(Q.when(_this.target, function() {
-              return _this.target[name].apply(_this.target, args);
-            }));
+          if (target[name]) {
+            result = target[name].apply(target, args);
           } else {
-            return QProxy(target.post(name, args));
+            result = target.post(name, args);
+          }
+          if ((result != null) && typeof result === "object") {
+            return QProxy(result);
+          } else {
+            return result;
           }
         };
       } else {
